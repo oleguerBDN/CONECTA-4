@@ -12,6 +12,9 @@ const teclas = [];
 let start = false; 
 let playerTurn = 0; // YELLOW: 1 RED: 2
 
+let winYellow = '1111'; 
+let winRed = '2222';
+
 createBoardDivs();
 
 /* Afegeix element DOM al array */
@@ -29,9 +32,7 @@ let assignEvents = (tecla) =>{
 let teclaMouseOver = (e) => {
     switch (e.target.id) {
         case "col0": case "col1": case "col2": case "col3": case "col4": case "col5": case "col6":
-            if (start){
                 document.getElementById(e.target.id).style.backgroundColor = "rgb(29, 62, 248)";
-            }
         break;
 
         default:
@@ -42,9 +43,7 @@ let teclaMouseOver = (e) => {
 let teclaMouseOut = (e) => {
     switch (e.target.id) {
         case "col0": case "col1": case "col2": case "col3": case "col4": case "col5": case "col6":
-            if (start){
                 document.getElementById(e.target.id).style.backgroundColor = "";
-            }
         break;
 
         default:
@@ -57,7 +56,6 @@ let teclaMouseClick = (e) => {
         case "start":
             if (!start) { 
                 resetAll();
-                //nextQuestion();
             } else { 
                 gameFinished();
             }
@@ -65,12 +63,70 @@ let teclaMouseClick = (e) => {
         case "col0": case "col1": case "col2": case "col3": case "col4": case "col5": case "col6":
             if (start){
                 addCard(e.target.id);
+                checkWinner(); 
             }
         break;
 
         default:
         break;
     }
+}
+
+/* Four different funcionts to check winner, by cols, rows and diagonal */
+function checkWinner(){
+    let winner = 0; 
+    winner = checkCols();
+    winner = checkRows();
+    if (winner!== 0) { defineWinner(winner); };
+}
+
+/* Check winner on rows */ 
+function checkRows(){
+    let winner = 0; 
+    let str = ""; 
+    for(let i = 0; i<board[i].length; i++){
+        str = ""; 
+        for (let k = 0; k<board.length; k++) {
+            str = str + board[k][i];
+            //document.getElementById('kk').innerHTML = document.getElementById('kk').innerHTML + " - " + k + i + " (" + board[k][i] + ") "; 
+        }
+        if (str.includes(winYellow)) { winner = 1 };
+        if (str.includes(winRed)) { winner = 2 };
+        if (winner !== 0) { return winner; }
+    }
+    return 0; 
+}
+
+/* Check winner on columns */ 
+function checkCols(){
+    let winner = 0; 
+    let str = ""; 
+    for(let i = 0; i<board.length; i++){
+        str = ""; 
+        for (let k = 0; k<board[i].length; k++) {
+            str = str + board[i][k];
+        }
+        if (str.includes(winYellow)) { winner = 1 };
+        if (str.includes(winRed)) { winner = 2 };
+        if (winner !== 0) { return winner; }
+    }
+    return 0; 
+}
+
+/* Define the winner and modify the html required */
+function defineWinner(w){
+    if (w === 1){
+        document.getElementById("pturn").innerHTML = "YELLOW PLAYER WINS!";
+    } else {
+        document.getElementById("pturn").innerHTML = "RED PLAYER WINS!";
+    }
+
+    start = false;
+    document.getElementById("start").style.backgroundColor = "rgb(15, 230, 15)";
+    document.getElementById("start").innerHTML = "- - RESSTART GAME - -";
+    document.getElementById("pturn").style.backgroundColor = "";
+    playerTurn = 0; 
+
 }
 
 /* Add card, css color and change the playerTurn, if column is already full it does nothing */ 

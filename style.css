@@ -17,19 +17,21 @@
     flex-direction: column;
     justify-content: center;
     height: auto;
+    cursor: pointer;
 }
 
 .col div{
     border: black 1px solid;
-    height: 42px;
+    height: 50px;
     width: 50px;
     margin: 10px;
     border-radius: 90%;
     text-align: center;
-    padding-top: 8px;
-    font-size: 30px;   
+    pointer-events: none;
     background-color: aliceblue;  
 }
+
+
 
 .red{
     background-color: red;
@@ -54,8 +56,8 @@ h1{
     margin-top: 30px;
     font-size: 30px;
     padding: 10px 0; 
-    
 }
+
 .start{
     width: 70vw;
     height: auto;
@@ -67,4 +69,5 @@ h1{
     margin-top: 30px;
     font-size: 30px;
     padding: 10px 0; 
+    cursor: pointer;
 }

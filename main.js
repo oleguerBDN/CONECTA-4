@@ -76,8 +76,69 @@ let teclaMouseClick = (e) => {
 function checkWinner(){
     let winner = 0; 
     winner = checkCols();
-    winner = checkRows();
+    if (winner === 0){ winner = checkRows(); };
+    if (winner === 0){ winner = checkDiagonal1(); };
+    if (winner === 0){ winner = checkDiagonal2(); };
+
     if (winner!== 0) { defineWinner(winner); };
+}
+
+/* Check diagonal bottom-top left-right */
+function checkDiagonal2(){
+    let str1 = "";
+    let str2 = "";
+    let longitud = 5; 
+    let k = 0; 
+    let x = 0; 
+    let winner = 0; 
+    for (let i = 0; i <= 2; i++){
+        str1 = ""; str2 = ""; 
+        k= i; 
+        x = i + 1; 
+        for (let j = 0; j <=longitud; j++){
+            str1 = str1 + board[j][k];
+            str2 = str2 + board[x][j];
+            k++; x++; 
+        }
+        longitud--;
+        if (str1.includes(winYellow)) { winner = 1 };
+        if (str1.includes(winRed)) { winner = 2 };
+        if (str2.includes(winYellow)) { winner = 1 };
+        if (str2.includes(winRed)) { winner = 2 };
+        if (winner !== 0) { return winner; }
+        
+    }
+    return 0; 
+
+}
+
+/* Check diagonal top-bottom left-right */
+function checkDiagonal1(){
+    let str1 = "";
+    let str2 = "";
+    let longitud = 5; 
+    let k = 0; 
+    let x = 0; 
+    let winner = 0; 
+    for (let i = 0; i <= 2; i++){
+        str1 = ""; str2 = ""; 
+        k= i; 
+        x = i + 1; 
+        for (let j = 0; j <=longitud; j++){
+            str1 = str1 + board[j][k];
+            str2 = str2 + board[x][j];
+            k++; x++; 
+        }
+        longitud--;
+        if (str1.includes(winYellow)) { winner = 1 };
+        if (str1.includes(winRed)) { winner = 2 };
+        if (str2.includes(winYellow)) { winner = 1 };
+        if (str2.includes(winRed)) { winner = 2 };
+        if (winner !== 0) { return winner; }
+        
+    }
+    return 0; 
+
 }
 
 /* Check winner on rows */ 
@@ -88,7 +149,6 @@ function checkRows(){
         str = ""; 
         for (let k = 0; k<board.length; k++) {
             str = str + board[k][i];
-            //document.getElementById('kk').innerHTML = document.getElementById('kk').innerHTML + " - " + k + i + " (" + board[k][i] + ") "; 
         }
         if (str.includes(winYellow)) { winner = 1 };
         if (str.includes(winRed)) { winner = 2 };
@@ -123,7 +183,7 @@ function defineWinner(w){
 
     start = false;
     document.getElementById("start").style.backgroundColor = "rgb(15, 230, 15)";
-    document.getElementById("start").innerHTML = "- - RESSTART GAME - -";
+    document.getElementById("start").innerHTML = "- - RESTART GAME - -";
     document.getElementById("pturn").style.backgroundColor = "";
     playerTurn = 0; 
 

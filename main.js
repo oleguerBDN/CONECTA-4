@@ -22,7 +22,6 @@ teclasId.forEach(function(tecla){
     teclas.push(document.getElementById(tecla));
   })
 
-
 let assignEvents = (tecla) =>{
     tecla.onmouseover = teclaMouseOver;
     tecla.onmouseout = teclaMouseOut;
@@ -174,15 +173,22 @@ function checkCols(){
 /* Define the winner and modify the html required */
 function defineWinner(w){
     if (w === 1){
-        document.getElementById("pturn").innerHTML = "YELLOW PLAYER WINS!";
+        document.getElementById("pturn").innerHTML = "<b>YELLOW PLAYER WINS!<b>";
+        document.getElementById("pturn").style.textShadow = "3px 3px 2px black";
+        document.getElementById("pturn").style.color = "yellow";
     } else {
-        document.getElementById("pturn").innerHTML = "RED PLAYER WINS!";
+        document.getElementById("pturn").innerHTML = "<b>RED PLAYER WINS!</b>";
+        document.getElementById("pturn").style.textShadow = "3px 3px 2px black";
+        document.getElementById("pturn").style.color = "red";
     }
+
 
     start = false;
     document.getElementById("start").style.backgroundColor = "rgb(15, 230, 15)";
     document.getElementById("start").innerHTML = "- - RESTART GAME - -";
     document.getElementById("pturn").style.backgroundColor = "";
+
+    document.getElementById("pturn").style.backgroundImage = "url(party.jpg)";
     playerTurn = 0; 
 
 }
@@ -221,6 +227,9 @@ function changePlayerTurn(){
 /* Reset all thins from scratch so user can start again */
 function resetAll(){
     resetMainBoard();
+    document.getElementById("pturn").style.textShadow = "";
+    document.getElementById("pturn").style.color = "";
+    document.getElementById("pturn").style.backgroundImage = "";
     document.getElementById("start").style.backgroundColor = "red";
     document.getElementById("start").innerHTML = "- - END GAME - -";
     document.getElementById("pturn").style.backgroundColor = "yellow";
@@ -264,8 +273,6 @@ function resetMainBoard(){
         }
     }
 }
-
-
 
 /* checking for user interaction */
 teclas.forEach(assignEvents); /* mouse events on designed buttons */

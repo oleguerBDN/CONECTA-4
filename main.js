@@ -88,17 +88,15 @@ function checkDiagonal2(){
     let str1 = "";
     let str2 = "";
     let longitud = 5; 
-    let k = 0; 
-    let x = 0; 
+    let k,x,y = 0; 
     let winner = 0; 
-    for (let i = 0; i <= 2; i++){
+    for (let i = 5; i >= 3; i--){
         str1 = ""; str2 = ""; 
-        k= i; 
-        x = i + 1; 
+        k=i; x=6-i; y=5; 
         for (let j = 0; j <=longitud; j++){
             str1 = str1 + board[j][k];
-            str2 = str2 + board[x][j];
-            k++; x++; 
+            str2 = str2 + board[x][y];
+            k--; x++; y--; 
         }
         longitud--;
         if (str1.includes(winYellow)) { winner = 1 };

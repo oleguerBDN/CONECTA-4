@@ -79,3 +79,31 @@ h1{
     padding: 10px 0; 
     cursor: pointer;
 }
+
+.mode{
+    width: 70vw;
+    height: auto;
+    border: black 2px solid;
+    text-align: center;
+    background-color: 'yellow';
+    color: black;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 15px;
+    margin-top: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.users{
+    background-color: rgb(210, 235, 255);    
+    flex-grow: 2;
+    padding: 10px 0; 
+}
+
+.cpu{
+
+    background-color: rgb(4, 138, 248);
+    flex-grow: 2;
+    padding: 10px 0; 
+}
